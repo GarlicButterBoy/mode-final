@@ -19,35 +19,113 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+
+
+class MySettingsPage extends StatelessWidget {
+  
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Settings Page'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Home Page'),
+          onPressed: () {
+            //Navigate Back Home
+            Navigator.pop(context);
+          },
+          ),
+      ),
+    );
+  }
 }
 
-// class MySettingsPage extends StatelessWidget {
+
+class DeleteMediaPage extends StatelessWidget {
   
-//   @override
-//   Widget build(BuildContext context)
-//   {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Settings Page'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           child: Text('Settings Page'),
-//           onPressed: () {
-//             //Navigate Back Home
-//             Navigator.pop(context);
-//           },
-//           ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Delete Media Page'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Home'),
+          onPressed: () {
+            //Navigate Back Home
+            Navigator.pop(context);
+          },
+          ),
+      ),
+    );
+  }
+}
 
+//TODO: Change this to HOME Screen
+class MyHomePage extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Page'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+                child: Text(
+                  'Welcome to our Final Project for MODE4201 - This app will let you track what media you\'ve been consuming.',
+                  style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+                ),
+                elevation: 5,
+                ),
+          ),
+        ElevatedButton(
+          child: Text('Settings Page'),
+          onPressed: () {
+            //Navigate to Settings
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MySettingsPage()),
+            );
+          }, //Settings Page Navigation
+          ),
+          ElevatedButton(
+          child: Text('View Page'),
+          onPressed: () {
+            //Navigate to Settings
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ViewMediaPage()),
+            );
+          }, //Settings Page Navigation
+          ),
+        ],
+      ),
+    );
+  }
+}
+//TODO: Update this page to be the VIEW page
+class ViewMediaPage extends StatefulWidget {
+  @override
+  State<ViewMediaPage> createState() => _ViewMediaPageState();
+}
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ViewMediaPageState extends State<ViewMediaPage> {
   // final nameController = TextEditingController();
 
   // final costController = TextEditingController();
@@ -72,6 +150,15 @@ final List<Media> _userMedia = [
       review: "This sucked!",
       ),
   ];
+
+//TODO: This doesn't do anything - Trying to delete a list item
+  // void _deleteMedia(String id)
+  // {
+  //   //TODO: Actually write some code that deletes the item
+  //   setState(() {
+  //     _userMedia.removeWhere((element) => false);
+  //   });
+  // }
   
   void _addNewMedia(String name, double rating, String type, String review) 
   {
@@ -94,6 +181,19 @@ final List<Media> _userMedia = [
       _userMedia.add(newMedia);
     });
   }
+//TODO: This doesn't do anything - Trying to pop up warning of deletion
+  // void _startDeleteMedia(BuildContext ctx) {
+  //   showModalBottomSheet(
+  //     context: ctx, 
+  //     builder: (_) {
+  //       return GestureDetector(
+  //         onTap: () {},
+  //         child: DeleteMediaPage(_deleteMedia()),
+  //         behavior: HitTestBehavior.opaque,
+  //       );
+  //     },
+  //     );
+  // }
 
   void _startAddNewMedia(BuildContext ctx) {
     showModalBottomSheet(
@@ -130,7 +230,7 @@ final List<Media> _userMedia = [
             child: Card(
               color: Colors.blue,
                 child: Text(
-                  'Welcome to our Final Project for MODE4201 - This app will let you track what media you\'ve been consuming.',
+                  'View the media here:',
                   style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -141,14 +241,11 @@ final List<Media> _userMedia = [
           ),
           MediaList(_userMedia),
           ElevatedButton(
-          child: Text('Settings Page'),
+          child: Text('Home'),
           onPressed: () {
-            //Navigate to Settings
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => MySettingsPage()),
-            // );
-          }, //Settings Page Navigation
+            //Navigate Back Home
+            Navigator.pop(context);
+          },
           ),
         ],
       ),
