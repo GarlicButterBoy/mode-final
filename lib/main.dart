@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lab6_mode/widgets/new_media.dart';
 import 'package:lab6_mode/widgets/media_list.dart';
@@ -18,11 +20,32 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+// class MySettingsPage extends StatelessWidget {
+  
+//   @override
+//   Widget build(BuildContext context)
+//   {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Settings Page'),
+//       ),
+//       body: Center(
+//         child: ElevatedButton(
+//           child: Text('Settings Page'),
+//           onPressed: () {
+//             //Navigate Back Home
+//             Navigator.pop(context);
+//           },
+//           ),
+//       ),
+//     );
+//   }
+// }
+
 
 class _MyHomePageState extends State<MyHomePage> {
   // final nameController = TextEditingController();
@@ -107,7 +130,7 @@ final List<Media> _userMedia = [
             child: Card(
               color: Colors.blue,
                 child: Text(
-                  'CHART!',
+                  'Welcome to our Final Project for MODE4201 - This app will let you track what media you\'ve been consuming.',
                   style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -117,6 +140,16 @@ final List<Media> _userMedia = [
                 ),
           ),
           MediaList(_userMedia),
+          ElevatedButton(
+          child: Text('Settings Page'),
+          onPressed: () {
+            //Navigate to Settings
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => MySettingsPage()),
+            // );
+          }, //Settings Page Navigation
+          ),
         ],
       ),
     ),

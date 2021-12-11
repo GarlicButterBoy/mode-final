@@ -43,49 +43,56 @@ class _NewMediaState extends State<NewMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-          elevation: 5,
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Media Name: ',
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+        return Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Media Name: ',
+                    ),
+                    controller: nameController,
+                    onSubmitted: (_) => submitData(),
                   ),
-                  controller: nameController,
-                  onSubmitted: (_) => submitData(),
-                ),
-                TextField(decoration: InputDecoration(
-                    labelText: 'Rating: ',
+                  TextField(decoration: InputDecoration(
+                      labelText: 'Rating: ',
+                    ),
+                    controller: ratingController,
+                    keyboardType: TextInputType.number,
+                    onSubmitted: (_) => submitData()
                   ),
-                  controller: ratingController,
-                  keyboardType: TextInputType.number,
-                  onSubmitted: (_) => submitData()
-                ),
-                TextField(decoration: InputDecoration(
-                    labelText: 'Type: ',
+                  TextField(decoration: InputDecoration(
+                      labelText: 'Type: ',
+                    ),
+                    controller: typeController,
+                    onSubmitted: (_) => submitData(),
                   ),
-                  controller: typeController,
-                  onSubmitted: (_) => submitData(),
-                ),
-                TextField(decoration: InputDecoration(
-                    labelText: 'Review: ',
+                  TextField(decoration: InputDecoration(
+                      labelText: 'Review: ',
+                    ),
+                    controller: reviewController,
+                    onSubmitted: (_) => submitData(),
                   ),
-                  controller: reviewController,
-                  onSubmitted: (_) => submitData(),
-                ),
-                FlatButton(
-                  
-                  onPressed: submitData, 
-                  child: Text('Add Media'),
-                  color: Colors.blue,
-                ),
-              ],
+                  FlatButton(
+                    
+                    onPressed: submitData, 
+                    child: Text('Add Media'),
+                    color: Colors.blue,
+                  ),
+                ],
 
+              ),
             ),
-          ),
-        );
+          );
+        },
+      ),
+    );
   }
 }
