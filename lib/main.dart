@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lab6_mode/widgets/new_plant.dart';
-import 'package:lab6_mode/widgets/plant_list.dart';
+import 'package:lab6_mode/widgets/new_media.dart';
+import 'package:lab6_mode/widgets/media_list.dart';
 
-import 'models/plant.dart';
+import 'models/media.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MODE4201 - Lab 7',
+      title: 'MODE4201 Final - Media Tracker',
       home: MyHomePage(),
     );
   }
@@ -31,44 +31,54 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // final typeController = TextEditingController();
 
-final List<Plant> _userPlants = [
-    Plant(
-      id: 'p1', 
-      name: 'Tomato Plant', 
-      amount: 7.69, 
+final List<Media> _userMedia = [
+    Media(
+      id: 'm1', 
+      name: 'Pet Sematary', 
+      rating: 5, 
       date: DateTime.now(),
-      type: 'Plant',
+      type: 'Book',
+      review: "This was pretty good.",
       ),
-    Plant(
-      id: 'p2', 
-      name: 'Oyster Mushrooms', 
-      amount: 14.99, 
+    Media(
+      id: 'm2', 
+      name: 'The Devil Below', 
+      rating: 1, 
       date: DateTime.now(),
-      type: 'Mushroom',
+      type: 'Movie',
+      review: "This sucked!",
       ),
   ];
   
-  void _addNewPlant(String name, double cost, String type) {
-    final newPlant = Plant(
+  void _addNewMedia(String name, double rating, String type, String review) 
+  {
+
+    if (review == "")
+    {
+      review = "No Review";
+    }
+
+    final newMedia = Media(
       name: name, 
-    amount: cost, 
-    type: type, 
-    date: DateTime.now(), 
-    id: DateTime.now().toString(),
+      rating: rating, 
+      type: type, 
+      review: review,
+      date: DateTime.now(), 
+      id: DateTime.now().toString(),
     );
 
     setState(() {
-      _userPlants.add(newPlant);
+      _userMedia.add(newMedia);
     });
   }
 
-  void _startAddNewPlant(BuildContext ctx) {
+  void _startAddNewMedia(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx, 
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NewPlant(_addNewPlant),
+          child: NewMedia(_addNewMedia),
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -79,11 +89,11 @@ final List<Plant> _userPlants = [
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      title: Text('Lab 7 Home'),
+      title: Text('Media Tracker Home'),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.add_box_outlined),
-          onPressed: () => _startAddNewPlant(context), 
+          onPressed: () => _startAddNewMedia(context), 
         ),
       ],
     ),
@@ -106,14 +116,14 @@ final List<Plant> _userPlants = [
                 elevation: 5,
                 ),
           ),
-          PlantList(_userPlants),
+          MediaList(_userMedia),
         ],
       ),
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.add_box_outlined),
-      onPressed: () => _startAddNewPlant(context),
+      onPressed: () => _startAddNewMedia(context),
       ),
       
     );

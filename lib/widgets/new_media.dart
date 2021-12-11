@@ -2,36 +2,40 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
-class NewPlant extends StatefulWidget {
+class NewMedia extends StatefulWidget {
   final Function addPlant;
 
-  NewPlant(this.addPlant);
+  NewMedia(this.addPlant);
 
   @override
-  State<NewPlant> createState() => _NewPlantState();
+  State<NewMedia> createState() => _NewMediaState();
 }
 
-class _NewPlantState extends State<NewPlant> {
+//TODO: BUG? - When typing into the text fields, the screen doesn't scroll and you can't see what you're typing after rating. 
+
+class _NewMediaState extends State<NewMedia> {
+  //Controllers for Create Screen
   final nameController = TextEditingController();
-
-  final costController = TextEditingController();
-
+  final ratingController = TextEditingController();
   final typeController = TextEditingController();
+  final reviewController = TextEditingController();
 
   void submitData() {
     final enteredName = nameController.text;
-    final enteredCost = double.parse(costController.text);
+    final enteredRating = double.parse(ratingController.text);
     final enteredType = typeController.text;
+    final enteredReview = reviewController.text;
 
-    if (enteredName.isEmpty || enteredType.isEmpty || enteredCost < 0.01)
+    if (enteredName.isEmpty || enteredType.isEmpty || enteredRating < 1)
     {
       return;
     }
 
     widget.addPlant(
               enteredName, 
-              enteredCost, 
-              enteredType
+              enteredRating, 
+              enteredType,
+              enteredReview
             );
 
             Navigator.of(context).pop();
@@ -48,15 +52,15 @@ class _NewPlantState extends State<NewPlant> {
               children: <Widget>[
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Plant Name: ',
+                    labelText: 'Media Name: ',
                   ),
                   controller: nameController,
                   onSubmitted: (_) => submitData(),
                 ),
                 TextField(decoration: InputDecoration(
-                    labelText: 'Cost: ',
+                    labelText: 'Rating: ',
                   ),
-                  controller: costController,
+                  controller: ratingController,
                   keyboardType: TextInputType.number,
                   onSubmitted: (_) => submitData()
                 ),
@@ -66,10 +70,16 @@ class _NewPlantState extends State<NewPlant> {
                   controller: typeController,
                   onSubmitted: (_) => submitData(),
                 ),
+                TextField(decoration: InputDecoration(
+                    labelText: 'Review: ',
+                  ),
+                  controller: reviewController,
+                  onSubmitted: (_) => submitData(),
+                ),
                 FlatButton(
                   
                   onPressed: submitData, 
-                  child: Text('Add Plant'),
+                  child: Text('Add Media'),
                   color: Colors.blue,
                 ),
               ],

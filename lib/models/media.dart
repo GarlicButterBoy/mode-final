@@ -1,18 +1,20 @@
 import 'package:flutter/foundation.dart';
 
-class Plant {
+class Media {
   final String id; 
   final String name;
-  final double amount;
+  final double rating;
   final DateTime date;
   final String type;
+  final String review;
 
-  Plant({
+  Media({
     required this.id, 
     required this.name, 
-    required this.amount, 
+    required this.rating, 
     required this.date,
-    required this.type
+    required this.type,
+    required this.review
     });
 
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../models/plant.dart';
+import '../models/media.dart';
 import 'package:intl/intl.dart';
 
-class PlantList extends StatelessWidget {
-  final List<Plant> plants;
-  PlantList(this.plants);
+class MediaList extends StatelessWidget {
+  final List<Media> media;
+  MediaList(this.media);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 204,
+      height: 250,
       child: ListView.builder(
             itemBuilder: (context, index) { 
               return Card(
@@ -26,7 +26,7 @@ class PlantList extends StatelessWidget {
                     ),
                     padding: EdgeInsets.all(10),
                     child: Text(
-                    '\$${plants[index].amount.toStringAsFixed(2)}',
+                    '\$${media[index].rating.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -38,14 +38,14 @@ class PlantList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                     Text(
-                      plants[index].name,
+                      media[index].name,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                       ),
                     Text(
-                      '${DateFormat('EEE, y-MMM, d').format(plants[index].date)} -- Type: ${plants[index].type}',
+                      '${DateFormat('EEE, y-MMM, d').format(media[index].date)} -- Type: ${media[index].type}',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class PlantList extends StatelessWidget {
               ),
               );
              },
-            itemCount: plants.length,
+            itemCount: media.length,
            ),
     );
   }
